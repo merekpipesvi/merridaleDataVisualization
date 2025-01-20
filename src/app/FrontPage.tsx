@@ -10,7 +10,7 @@ import { FilterControls } from "./components/FilterControls";
 import { ToggleCompanyVisibility } from "./components/ToggleCompanyVisibility";
 import { SalesChart } from "./components/SalesChart";
 import { getCompanyListWithChange } from "./utils/getCompanyListWithChange";
-import { Group, Paper, ScrollArea, Select, Stack, Title } from "@mantine/core";
+import { Group, Paper, Select, Stack, Title } from "@mantine/core";
 
 const EMPTY_COMPARISON_YEAR = "Average of Past Years";
 
