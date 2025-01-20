@@ -39,7 +39,6 @@ export const summarizeData = (
         .map(([company, years]) => {
             const xValues = allYears;
             const yValues = xValues.map((year) => (years as Record<number, number>)[year] || 0);
-            console.log(years)
 
             return {
                 x: xValues,
