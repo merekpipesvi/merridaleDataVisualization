@@ -33,12 +33,13 @@ export const summarizeData = (
     }, {} as Record<string, Record<number, number>>);
 
     // Ensure 0 values for missing years
-    const allYears = Array.from(new Set(Object.values(summary).flatMap(Object.keys))).map(Number).sort((a, b) => a - b);
+    const allYears = Array.from(new Set((Object.values(summary) as object[]).flatMap(Object.keys))).map(Number).sort((a, b) => a - b);
     const returnData = Object.entries(summary)
         .filter(([company]) => visibleCompanies.has(company))
         .map(([company, years]) => {
             const xValues = allYears;
-            const yValues = xValues.map((year) => years[year] || 0);
+            const yValues = xValues.map((year) => (years as Record<number, number>)[year] || 0);
+            console.log(years)
 
             return {
                 x: xValues,
