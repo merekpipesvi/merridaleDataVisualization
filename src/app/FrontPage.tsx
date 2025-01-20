@@ -132,14 +132,14 @@ export const FrontPage = () => {
             {companyOptions.length > 0 && summary && (
                 <Paper shadow="sm" p="md" withBorder>
                     <Title order={5}>Toggle Company Visibility</Title>
-                    <ScrollArea style={{ maxHeight: 500 }} scrollbars="y">
+                   
                         <ToggleCompanyVisibility
                             companyOptions={getCompanyListWithChange(summary, selectedYear, yearToCompare)} // Pass the summary here
                             visibleCompanies={visibleCompanies}
                             toggleCompanyVisibility={toggleCompanyVisibility}
                             toggleAllCompanies={toggleAllCompanies}
                         />
-                    </ScrollArea>
+                   
                 </Paper>
             )}
             {plotData.length > 0 && plotLayout && <SalesChart plotData={plotData} plotLayout={plotLayout} />}

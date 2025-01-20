@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^7.16.1",
+    "@mantine/dates": "^7.16.1",
     "next": "15.0.3",
     "papaparse": "^5.4.1",
     "plotly.js": "^2.35.2",
