@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const summarizeData = (
     data: any[],
-    selectedSalesperson: string | null,
+    selectedArea: string | null,
     dateRange: [Date | null, Date | null],
     visibleCompanies: Set<string>
 ) => {
-    if (!selectedSalesperson || !dateRange[0] || !dateRange[1]) return {data: [], summary: {}};
+    if (!selectedArea || !dateRange[0] || !dateRange[1]) return {data: [], summary: {}};
 
     const [startMonth, endMonth] = [
         dateRange[0]?.getMonth() + 1,
@@ -13,11 +13,11 @@ export const summarizeData = (
     ];
 
     const filtered = data.filter((row) => {
-        const salespersonMatches = row["Sales Person"] === selectedSalesperson;
+        const areaMatches = row["Region"] === selectedArea;
         const rowDate = new Date(row["Delivery Date"]);
         const monthMatches = rowDate.getMonth() + 1 >= startMonth && rowDate.getMonth() + 1 <= endMonth;
 
-        return salespersonMatches && monthMatches;
+        return areaMatches && monthMatches;
     });
 
     const summary = filtered.reduce((acc, row) => {

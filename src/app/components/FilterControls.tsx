@@ -4,27 +4,27 @@ import { Select, Stack, Text } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 
 interface FilterControlsProps {
-    salespersonOptions: string[];
-    selectedSalesperson: string | null;
-    setSelectedSalesperson: (salesperson: string | null) => void;
+    areaOptions: string[];
+    selectedArea: string | null;
+    setSelectedArea: (area: string | null) => void;
     dateRange: [Date | null, Date | null];
     setDateRange: (range: [Date | null, Date | null]) => void;
 }
 
 export const FilterControls: React.FC<FilterControlsProps> = ({
-    salespersonOptions,
-    selectedSalesperson,
-    setSelectedSalesperson,
+    areaOptions,
+    selectedArea,
+    setSelectedArea,
     dateRange,
     setDateRange,
 }) => (
     <div style={{ marginTop: 20 }}>
         <Select
-            label="Who are you?!"
-            data={salespersonOptions}
-            value={selectedSalesperson}
-            onChange={setSelectedSalesperson}
-            placeholder="Select Salesperson"
+            label="Region"
+            data={areaOptions}
+            value={selectedArea}
+            onChange={setSelectedArea}
+            placeholder="Select Area"
         />
         <Stack align="center" p="2rem">
             <Text fw="500">Pick a date range to compare across years</Text>

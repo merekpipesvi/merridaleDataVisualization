@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const processCSV = (data: any[]) => {
-    const uniqueSalespeople = Array.from(
-        new Set(data.map((row) => row["Sales Person"]).filter(Boolean))
+    const uniqueAreas = Array.from(
+        new Set(data.map((row) => row["Region"]).filter(Boolean))
     );
 
     const uniqueCompanies = Array.from(
@@ -12,5 +12,6 @@ export const processCSV = (data: any[]) => {
         new Set(data.map((row) => new Date(row["Delivery Date"]).getFullYear()))
     ).filter((num) => !isNaN(num)).sort((a, b) => a - b);
 
-    return { uniqueSalespeople, uniqueCompanies, uniqueYears };
+    console.log({uniqueAreas, uniqueYears})
+    return { uniqueAreas, uniqueCompanies, uniqueYears };
 };

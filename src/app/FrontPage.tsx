@@ -17,9 +17,9 @@ const EMPTY_COMPARISON_YEAR = "Average of Past Years";
 export const FrontPage = () => {
     const [file, setFile] = useState<File | null>(null);
     const [salesData, setSalesData] = useState<any[]>([]);
-    const [salespersonOptions, setSalespersonOptions] = useState<string[]>([]);
+    const [areaOptions, setAreaOptions] = useState<string[]>([]);
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
-    const [selectedSalesperson, setSelectedSalesperson] = useState<string | null>(null);
+    const [selectedArea, setSelectedArea] = useState<string | null>(null);
     const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
     const [visibleCompanies, setVisibleCompanies] = useState<Set<string>>(new Set());
     const [plotData, setPlotData] = useState<any[]>([]);
@@ -42,10 +42,10 @@ export const FrontPage = () => {
                 skipEmptyLines: true,
                 complete: (result) => {
                     const parsedData = result.data;
-                    const { uniqueSalespeople, uniqueCompanies, uniqueYears } = processCSV(parsedData);
+                    const { uniqueAreas, uniqueCompanies, uniqueYears } = processCSV(parsedData);
                     setUniqueYears(uniqueYears);
                     setSalesData(parsedData);
-                    setSalespersonOptions(uniqueSalespeople);
+                    setAreaOptions(uniqueAreas);
                     setCompanyOptions(uniqueCompanies);
                     setVisibleCompanies(new Set());
                     setPlotLayout({
@@ -81,24 +81,24 @@ export const FrontPage = () => {
     useEffect(() => {
         const { data, summary: newSummary } = summarizeData(
             salesData,
-            selectedSalesperson,
+            selectedArea,
             dateRange,
             visibleCompanies
         );
         setPlotData(data);
         setSummary(newSummary); // Store the summary for use in the company list
-    }, [salesData, selectedSalesperson, dateRange, visibleCompanies]);
+    }, [salesData, selectedArea, dateRange, visibleCompanies]);
 
     return (
         <Stack gap="md" p="md" align="center">
             {isDataLoaded ? null : <FileUploader file={file} setFile={setFile} onUpload={handleFileUpload} />}
            <Paper>
                 <Stack align="center">
-                    {salespersonOptions.length > 0 && (
+                    {areaOptions.length > 0 && (
                         <FilterControls
-                            salespersonOptions={salespersonOptions}
-                            selectedSalesperson={selectedSalesperson}
-                            setSelectedSalesperson={setSelectedSalesperson}
+                            areaOptions={areaOptions}
+                            selectedArea={selectedArea}
+                            setSelectedArea={setSelectedArea}
                             dateRange={dateRange}
                             setDateRange={setDateRange}
                         />
@@ -121,7 +121,7 @@ export const FrontPage = () => {
                 )}
                 {uniqueYears.length > 0 && (
                     <Select
-                        label="Select a year to compare to..."
+                        label="Select a year to compare against..."
                         defaultValue={EMPTY_COMPARISON_YEAR}
                         data={[{label: EMPTY_COMPARISON_YEAR, value: EMPTY_COMPARISON_YEAR}, ...uniqueYears.filter((year) => year < (selectedYear ?? 0)).map((year) => ({ value: year.toString(), label: year.toString() }))]}
                         onChange={(value) =>{ setYearToCompare(value == EMPTY_COMPARISON_YEAR ? null : Number(value))}}
